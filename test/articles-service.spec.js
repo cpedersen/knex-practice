@@ -94,24 +94,18 @@ describe(`Articles service object`, function() {
             .insert(testArticles)
         })
 
-        //TODO - test failure is here
         it(`getById() resolves an article by id from 'blogful_articles' table`, () => {
             const thirdId = 3
             const thirdTestArticle = testArticles[thirdId - 1]
-            //const thirdTestArticle = testArticles.find(a => a.id === thirdId);
             return ArticlesService.getById(db, thirdId)
                 .then(actual => {
                     expect(actual).to.eql({
                         id: thirdId,
                         title: thirdTestArticle.title,
                         content: thirdTestArticle.content,
-                        //date_published: thirdTestArticle.date_published,
                         date_published: new Date(thirdTestArticle.date_published),
                     })
                 })
-                /*.then(actual => {
-                    expect(actual).to.eql(thirdTestArticle)
-                })*/
         })
     
         it(`getAllArticles() resolves all articles from 'blogful_articles' table`, () => {
@@ -164,6 +158,8 @@ describe(`Articles service object`, function() {
       })
 
 
+
+
     //NO DATA TEST
     context(`Given 'blogful_articles' has no data`, () => {
        it(`getAllArticles() resolves an empty array`, () => {
@@ -173,8 +169,6 @@ describe(`Articles service object`, function() {
            })
        })
     })
-
-
 
     it(`insertArticle() inserts a new article and resolves the new article with an 'id'`, () => {
         const newArticle = {
